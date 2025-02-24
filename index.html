@@ -22,32 +22,29 @@
     <main>
         <!-- Initial Creation -->
         <section>
-            <div class="left">
+            <div class="left card">
                 <div>example = MySQL_Database('example', CONFIG)</div>
                 <div>people = example.table('people')</div>
                 <div>jobs = example.table('jobs')</div>
                 <div>companies = example.table('companies')</div>
             </div>
-            <div class="right">
+            <div class="right card">
                 <div>CREATE DATABASE IF NOT EXISTS example</div>
                 <div>
                     CREATE TABLE IF NOT EXISTS people <br>
-                    if not <br>
-                        (people_id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(people_id)) <br>
+                    (people_id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(people_id)) <br>
                     SELECT * FROM people LIMIT 1 <br>
                     SHOW CREATE TABLE people <br>
                 </div>
                 <div>
                     CREATE TABLE IF NOT EXISTS jobs <br>
-                    if not <br>
-                        (jobs INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(jobs_id)) <br>
+                    (jobs INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(jobs_id)) <br>
                     SELECT * FROM jobs LIMIT 1 <br>
                     SHOW CREATE TABLE jobs <br>
                 </div>
                 <div>
                     CREATE TABLE IF NOT EXISTS companies <br>
-                    if not <br>
-                        (companies_id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(companies_id)) <br>
+                    (companies_id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(companies_id)) <br>
                     SELECT * FROM companies LIMIT 1 <br>
                     SHOW CREATE TABLE companies <br>
                 </div>
@@ -56,14 +53,14 @@
 
         <!-- Column Setup -->
         <section>
-            <div class="left">
+            <div class="left card">
                 <div>people.add_columns(('first_name', 'VARCHAR(50)'), ('last_name', 'VARCHAR(50)'), ('date_of_birth', 'DATE'))</div>
                 <div>jobs.add_columns(('job_title', 'VARCHAR(100)'), ('salary', 'DECIMAL(9,2)'))</div>
                 <div>companies.add_columns(('name', 'VARCHAR(100)'), ('address', 'TEXT'))</div>
                 <div>jobs.link_to(companies)</div>
                 <div>people.link_to(jobs)</div>
             </div>
-            <div class="right">
+            <div class="right card">
                 <div>
                     ALTER TABLE people ADD (people_first_name VARCHAR(50))<br>
                     ALTER TABLE people ADD (people_last_name VARCHAR(50))<br>
@@ -91,7 +88,7 @@
 
         <!-- Data insertion -->
         <section>
-            <div class="left">
+            <div class="left card">
                 <div>
                     companies.insert(('Big Entertainment', '235 Oakwood Lane, Springfield, IL 62701'), <br>
                     <div class="tab">('Movie Startup', '742 Elm Street, Brookhaven, NY 11719'))</div>
@@ -119,7 +116,7 @@
                     people.insert(friends)
                 </div>
             </div>
-            <div class="right">
+            <div class="right card">
                 <div>
                     INSERT INTO companies (companies_name, companies_address) VALUES ('Big Entertainment', '235 Oakwood Lane, Springfield, IL 62701')<br>
                     INSERT INTO companies (companies_name, companies_address) VALUES ('Movie Startup', '742 Elm Street, Brookhaven, NY 11719')
@@ -149,7 +146,7 @@
 
         <!-- Selection Queries -->
         <section>
-            <div class="left">
+            <div class="left card">
                 <div>
                     people.select(<br>
                     <div class="tab">
@@ -169,16 +166,16 @@
                 
                 <div>example.execute()</div>
             </div>
-            <div class="right">
+            <div class="right card">
                 <div>
                     SELECT people_first_name as "First Name", people_last_name as "Last Name", jobs_job_title as "Job", jobs_salary as "Salary", 'companies_name as "Company" FROM people<br>
-                    INNER JOIN people on jobs.jobs_id = people.jobs_id <br>
-                    INNER JOIN jobs ON companies.companies_id = jobs.companies_id
+                    INNER JOIN jobs on people.jobs_id = jobs.jobs_id <br>
+                    INNER JOIN companies ON jobs.companies_id = companies.companies_id
                 </div>
                 <div>
                     SELECT companies_name as "Company", people_first_name as "First Name", jobs_salary as "Salary" FROM companies <br>
-                    INNER JOIN jobs ON companies.companies_id = jobs.companies_id <br>
-                    INNER JOIN people on jobs.jobs_id = people.jobs_id <br>
+                    INNER JOIN companies ON jobs.companies_id = companies.companies_id <br>
+                    INNER JOIN jobs on people.jobs_id = jobs.jobs_id <br>
                     ORDER BY companies_name, jobs_salary DESC
                 </div>
             </div>
