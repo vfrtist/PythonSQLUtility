@@ -387,13 +387,6 @@ class MySQL_Database:
         '''
         Returns a connection to the database.
         '''
-
-        '''
-        TODO Experiment with a double return?
-        return db, cursor
-        this may keep the connection alive so it becomes
-        with self.connct() as db, cursor:
-        '''
         try:
             return mysql.connector.connect(**self._config)
         except mysql.connector.Error as err:
