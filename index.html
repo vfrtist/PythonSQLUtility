@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Racing+Sans+One&display=swap"
         rel="stylesheet">
 
     <title>Python SQL Utility Demonstration</title>
@@ -18,17 +17,33 @@
 
 <body>
     <header class="container horizontal">
+        <div id="titleGap"></div>
         <h1>Python</h1>
         <h1>SQL</h1>
     </header>
     <main>
         <!-- Initial Creation -->
         <section>
+            <aside>
+                <h2>Class Based Design</h2>
+                <div>Tables and Databases are convenient python objects. If a table or database does not exist it's
+                    created with an automatic unique id field.
+                </div>
+                <div>Once linked it collects the table design into useful column and link properties</div>
+            </aside>
             <div class="left card">
-                <div>example = MySQL_Database('example', CONFIG)</div>
-                <div>people = example.table('people')</div>
-                <div>jobs = example.table('jobs')</div>
-                <div>companies = example.table('companies')</div>
+                <div>
+                    <c1>example</c1> = MySQL_Database('example', CONFIG)
+                </div>
+                <div>
+                    <c2>people</c2> = <c1>example</c1>.table('people')
+                </div>
+                <div>
+                    <c3>jobs</c3> = <c1>example</c1>.table('jobs')
+                </div>
+                <div>
+                    <c4>companies</c4> = <c1>example</c1>.table('companies')
+                </div>
             </div>
             <div class="right card">
                 <div>CREATE DATABASE IF NOT EXISTS example</div>
@@ -55,13 +70,35 @@
 
         <!-- Column Setup -->
         <section>
+            <aside>
+                <h2>Table Design</h2>
+                <div>Adding or removing columns is easy</div>
+                <div>Table names get pre-pended automatically for ease of distinguishing.</div>
+                <div>Linking is as easy as passing one Table (or multiple!) into the others link_to method.</div>
+            </aside>
             <div class="left card">
-                <div>people.add_columns(('first_name', 'VARCHAR(50)'), ('last_name', 'VARCHAR(50)'), ('date_of_birth',
-                    'DATE'))</div>
-                <div>jobs.add_columns(('job_title', 'VARCHAR(100)'), ('salary', 'DECIMAL(9,2)'))</div>
-                <div>companies.add_columns(('name', 'VARCHAR(100)'), ('address', 'TEXT'))</div>
-                <div>jobs.link_to(companies)</div>
-                <div>people.link_to(jobs)</div>
+                <div>
+                    <c2>people</c2>.add_columns(
+                    <div class="tab">
+                        ('first_name', 'VARCHAR(50)'), ('last_name', 'VARCHAR(50)'), ('date_of_birth', 'DATE') )
+                    </div>
+                </div>
+                <div>
+                    <c3>jobs</c3>.add_columns(
+                    <div class="tab">
+                        ('job_title', 'VARCHAR(100)'), ('salary', 'DECIMAL(9,2)') )
+                    </div>
+                </div>
+                <div>
+                    <c4>companies</c4>.add_columns(
+                    <div class="tab">('name', 'VARCHAR(100)'), ('address', 'TEXT') )</div>
+                </div>
+                <div>
+                    <c3>jobs</c3>.link_to(<c4>companies</c4>)
+                </div>
+                <div>
+                    <c2>people</c2>.link_to(<c3>jobs</c3>)
+                </div>
             </div>
             <div class="right card">
                 <div>
@@ -93,32 +130,27 @@
 
         <!-- Data insertion -->
         <section>
+            <aside>
+                <h2>Data Insertion</h2>
+                <div>Data is inserted with batches to increase speed.</div>
+                <div>No need to fill in column names, this makes them easier to populate.</div>
+            </aside>
+
             <div class="left card">
                 <div>
-                    companies.insert(('Big Entertainment', '235 Oakwood Lane, Springfield, IL 62701'), <br>
-                    <div class="tab">('Movie Startup', '742 Elm Street, Brookhaven, NY 11719'))</div>
+                    <c4>companies</c4>.insert(
+                    <div class="tab">
+                        ('Big Entertainment', '235 Oakwood Lane, Springfield, IL 62701'), <br>
+                        ('Movie Startup', '742 Elm Street, Brookhaven, NY 11719') )
+                    </div>
                 </div>
                 <div>
-                    jobs.insert(('Executive', 125000, 1), ('Graphic Designer', 65000, 1), <br>
+                    <c3>jobs</c3>.insert(
                     <div class="tab">
+                        ('Executive', 125000, 1), ('Graphic Designer', 65000, 1), <br>
                         ('Secretary', 75000, 1), ('Director', 100000, 2), <br>
-                        ('Consultant', 50000, 2), ('Producer', 85500, 2))
+                        ('Consultant', 50000, 2), ('Producer', 85500, 2) )
                     </div>
-                </div>
-                <div>
-                    friends = [('Emma', 'Johnson', '1993-04-15', 1),
-                    <div class="tab">
-                        ('James', 'Smith', '1987-10-21', 1), <br>
-                        ('Olivia', 'Brown', '1992-02-05', 2),
-                        ('Liam', 'Davis', '1985-07-13', 2), <br>
-                        ('Ava', 'Wilson', '2000-08-30', 3),
-                        ('Noah', 'Taylor', '1990-11-09', 3), <br>
-                        ('Isabella', 'Anderson', '1983-12-25', 4),
-                        ('Mason', 'Martinez', '1995-01-22', 5), <br>
-                        ('Sophia', 'Thomas', '1997-03-16', 5),
-                        ('Ethan', 'Moore', '1988-06-11', 6)] <br>
-                    </div>
-                    people.insert(friends)
                 </div>
             </div>
             <div class="right card">
@@ -137,6 +169,34 @@
                     INSERT INTO jobs (jobs_job_title, jobs_salary, companies_id) VALUES ('Consultant', 50000, 2) <br>
                     INSERT INTO jobs (jobs_job_title, jobs_salary, companies_id) VALUES ('Producer', 85500, 2)
                 </div>
+            </div>
+        </section>
+
+        <section>
+            <aside>
+                <h2>Data Flexibility</h2>
+                <div>You can also pass in lists.</div>
+            </aside>
+
+            <div class="left card">
+                <div>
+                    friends = [
+                    <div class="tab">
+                        ('Emma', 'Johnson', '1993-04-15', 1),
+                        ('James', 'Smith', '1987-10-21', 1), <br>
+                        ('Olivia', 'Brown', '1992-02-05', 2),
+                        ('Liam', 'Davis', '1985-07-13', 2), <br>
+                        ('Ava', 'Wilson', '2000-08-30', 3),
+                        ('Noah', 'Taylor', '1990-11-09', 3), <br>
+                        ('Isabella', 'Anderson', '1983-12-25', 4),
+                        ('Mason', 'Martinez', '1995-01-22', 5), <br>
+                        ('Sophia', 'Thomas', '1997-03-16', 5),
+                        ('Ethan', 'Moore', '1988-06-11', 6) ] <br>
+                    </div>
+                    <c2>people</c2>.insert(friends)
+                </div>
+            </div>
+            <div class="right card">
                 <div>
                     INSERT INTO people (people_first_name, people_last_name, people_date_of_birth, jobs_id) VALUES
                     ('Emma', 'Johnson', '1993-04-15', 1) <br>
@@ -164,23 +224,29 @@
 
         <!-- Selection Queries -->
         <section>
+            <aside>
+                <h2>Smarter Selection</h2>
+                <div>Searching is done with keywords.</div>
+                <div>This makes queries readable and easier to construct.</div>
+            </aside>
+
             <div class="left card">
                 <div>
-                    people.select(<br>
+                    <c2>people</c2>.select(<br>
                     <div class="tab">
-                        <i>values=</i>('people_first_name as "First Name", people_last_name as "Last Name",
+                        <i>values= </i>('people_first_name as "First Name", people_last_name as "Last Name",
                         jobs_job_title as "Job", jobs_salary as "Salary", 'companies_name as "Company"'), <br>
-                        <i>joins=</i>(jobs, jobs.join(companies)))
+                        <i>joins= </i>(<c3>jobs</c3>, <c3>jobs</c3>.join(<c4>companies</c4>)) )
                     </div>
                 </div>
 
                 <div>
-                    companies.select( <br>
+                    <c4>companies</c4>.select( <br>
                     <div class="tab">
-                        <i>values=</i>'companies_name as "Company", people_first_name as "First Name", jobs_salary as
+                        <i>values= </i>'companies_name as "Company", people_first_name as "First Name", jobs_salary as
                         "Salary"', <br>
-                        <i>joins=</i>(jobs, jobs.join(people)), <br>
-                        <i>order_by=</i>'companies_name, jobs_salary DESC')
+                        <i>joins= </i>(<c3>jobs</c3>, <c3>jobs</c3>.join(<c2>people</c2>)), <br>
+                        <i>order_by= </i>'companies_name, jobs_salary DESC') )
                     </div>
                 </div>
             </div>
