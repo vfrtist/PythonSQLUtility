@@ -1,8 +1,19 @@
 :root {
     --header: #96c5a6;
     --card: #fff;
-    --background: #928adf;
+    --dark: #2b4040;
+    --highlight: #cbc7ec;
+    --neutral: #c15ca1;
+
+    --left: #54f8a6;
+    --left-dark: #27B970;
+    --right: #ff9270;
+    --right-dark: #e3714f;
+    --font: #f7f0ed;
+    --background: linear-gradient(90deg, var(--left) 50%, var(--right) 50%);
+
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -44,26 +55,88 @@ main {
     width: 100dvw;
     height: 100dvh;
     overflow: auto;
-    gap: 8dvh 40px;
-    padding: 20px;
+    gap: 8dvh 4dvw;
+    padding: 2dvw;
     box-sizing: border-box;
 }
 
 section {
     grid-column-start: span 2;
     display: contents;
-    
+
     .card {
-        background: var(--card);
-        border-radius: 16px;
-        padding: 20px;
+        color: var(--font);
+        background: var(--dark);
+        border-radius: 26px;
+        padding: 12px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 8px;
+
+        div {
+            cursor: default;
+            transition: border .3s;
+            padding: 8px;
+            width: 100%;
+            border-radius: 14px;
+            box-sizing: border-box;
+        }
+    }
+
+    .left.card {
+        box-shadow: 12px 12px 0px var(--left-dark);
+    }
+
+    .right.card {
+        box-shadow: 12px 12px 0px var(--right-dark);
+    }
+
+    .left .highlight {
+        animation: leftBubble .35s forwards;
+    }
+
+    .right .highlight {
+        animation: rightBubble .35s forwards;
+    }
+}
+
+@keyframes leftBubble {
+    0% {
+        outline: 1px solid var(--left);
+        outline-offset: -2px;
+    }
+
+    80% {
+        outline-width: 2px;
+        outline-offset: 2px;
+    }
+
+    100% {
+        outline: 2px solid var(--left);
+        outline-offset: 0px;
     }
 
 }
+
+@keyframes rightBubble {
+    0% {
+        outline: 1px solid var(--right);
+        outline-offset: -2px;
+    }
+
+    80% {
+        outline-width: 2px;
+        outline-offset: 2px;
+    }
+
+    100% {
+        outline: 2px solid var(--right);
+        outline-offset: 0px;
+    }
+
+}
+
 
 .left {
     grid-column: 1;
@@ -89,4 +162,8 @@ header {
 
 .tab {
     padding-left: 20px;
+}
+
+i {
+    color: var(--neutral);
 }
