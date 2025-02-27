@@ -1,7 +1,6 @@
 from sql_utility import MySQL_Database
 
 PASSWORD = '<enter password here>'
-PASSWORD = 'mozgov-dejnix-7muzhI'
 CONFIG = {
     "user": "root",
     "password": PASSWORD,
@@ -22,7 +21,7 @@ companies = example.table('companies')
 '''
 Add all columns and create foreign key links
 '''
-'''
+
 people.add_columns(('first_name', 'VARCHAR(50)'),
                    ('last_name', 'VARCHAR(50)'),
                    ('date_of_birth', 'DATE')
@@ -36,13 +35,13 @@ companies.add_columns(('name', 'VARCHAR(100)'),
 
 jobs.link_to(companies)
 people.link_to(jobs)
-'''
+
 '''
 Create company, job, and people.
 These can be inserted both individually or as a list for flexibility.
 This is demonstrated below.
 '''
-'''
+
 companies.insert(('Big Entertainment', '235 Oakwood Lane, Springfield, IL 62701'),
                  ('Movie Startup', '742 Elm Street, Brookhaven, NY 11719')
                  )
@@ -67,7 +66,7 @@ friends = [('Emma', 'Johnson', '1993-04-15', 1),
            ('Ethan', 'Moore', '1988-06-11', 6)
            ]
 people.insert(friends)
-'''
+
 
 '''
 Selections are organized by keys, making them easier to compose
